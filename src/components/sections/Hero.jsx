@@ -5,7 +5,12 @@ import Typewriter from 'typewriter-effect';
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden px-4">
+    // UPDATED: Added pt-24 (padding-top) on mobile (default) and removed it on sm breakpoint (sm:pt-0). 
+    // This creates space to prevent content from overlapping the fixed header/logo on small screens.
+    <section 
+      id="home" 
+      className="pt-24 sm:pt-0 min-h-screen flex items-center justify-center relative overflow-hidden px-4"
+    >
       {/* Background blobs are preserved for the advanced theme */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary-500/10 rounded-full filter blur-3xl animate-float"></div>

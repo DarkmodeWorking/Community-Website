@@ -15,9 +15,11 @@ import UpcomingEvents from './pages/UpcomingEvents';
 import PastEvents from './pages/PastEvents';
 import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
+import Archives from './pages/Archives'; // ADD THIS IMPORT
 
 const AppContent = () => {
   const location = useLocation();
+  // Using useCallback for optimization
   const particlesInit = useCallback(async engine => { await loadSlim(engine); }, []);
   
   const particleOptions = {
@@ -73,7 +75,8 @@ const AppContent = () => {
     <div className="min-h-screen relative"> 
       {!isAdminRoute && <Particles id="tsparticles" init={particlesInit} options={particleOptions} className="fixed inset-0 -z-10" />}
       {!isAdminRoute && <Header />}
-      <main>
+      {/* UPDATED: Added className="relative" to <main> to satisfy Framer Motion's requirement for a non-static container, fixing the warning. */}
+      <main className="relative"> 
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             {/* PUBLIC ROUTES */}
@@ -85,6 +88,7 @@ const AppContent = () => {
             <Route path="/maintainers" element={<Maintainers />} />
             <Route path="/upcoming-events" element={<UpcomingEvents />} />
             <Route path="/past-events" element={<PastEvents />} />
+            <Route path="/archives" element={<Archives />} /> {/* ADD THIS ROUTE */}
             
             {/* ADMIN ROUTES */}
             <Route path="/admin" element={<AdminLogin />} />

@@ -30,9 +30,7 @@
 
   .header-logo {
     @apply relative w-12 h-12 rounded-full border-2 border-cyan-400/50 object-cover overflow-hidden;
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5), 
-                0 0 25px rgba(56, 189, 248, 0.3), 
-                inset 0 0 5px rgba(103, 232, 249, 0.4);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5), 0 0 25px rgba(56, 189, 248, 0.3), inset 0 0 5px rgba(103, 232, 249, 0.4);
     transition: box-shadow 0.3s ease, transform 0.3s ease;
   }
 
@@ -45,9 +43,7 @@
 
   .header-logo:hover {
     transform: scale(1.1);
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.8), 
-                0 0 35px rgba(56, 189, 248, 0.6), 
-                inset 0 0 8px rgba(103, 232, 249, 0.6);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.8), 0 0 35px rgba(56, 189, 248, 0.6), inset 0 0 8px rgba(103, 232, 249, 0.6);
   }
 
   .glass-effect {
@@ -183,23 +179,48 @@
     @apply h-full w-full rounded-lg object-cover;
   } 
 
-  .webinar-card {
-    @apply p-8 rounded-2xl text-center transition-all duration-300;
-    background: rgba(21, 21, 21, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
+  /* --- WEBINAR CARD STYLES --- */
+  .webinar-tech-card {
+    @apply relative p-1 rounded-2xl text-center transition-all duration-300 overflow-hidden cursor-pointer;
+    background: #08080c; 
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    z-index: 1;
   }
-  .webinar-card:hover {
-    transform: translateY(-10px);
-    background: rgba(30, 30, 30, 0.8);
-    border-color: rgba(59, 130, 246, 0.5);
-    box-shadow: 0 0 25px rgba(59, 130, 246, 0.2);
+  
+  .webinar-tech-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    /* Animated vibrant gradient border */
+    background: conic-gradient(transparent, #38bdf8, #8b5cf6, #f43f5e, #38bdf8);
+    z-index: -1;
+    animation: rotate 4s linear infinite;
   }
-  .webinar-card-icon {
-    @apply w-16 h-16 mx-auto mb-6 rounded-full flex items-center justify-center text-primary-400;
-    background: linear-gradient(145deg, rgba(59, 130, 246, 0.1), rgba(59, 130, 246, 0.05));
-    border: 1px solid rgba(59, 130, 246, 0.2);
+  
+  .webinar-tech-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 0 40px rgba(103, 232, 249, 0.6); /* Cyan/light blue hover glow */
   }
+  
+  .webinar-tech-card:hover::before {
+     animation-duration: 2s; /* Faster rotation on hover */
+  }
+
+  .webinar-inner-content {
+    @apply p-8 rounded-xl h-full w-full relative z-10;
+    background: radial-gradient(circle at 50% 50%, rgba(15, 15, 25, 0.95) 0%, rgba(8, 8, 12, 1) 100%);
+  }
+
+  .webinar-icon-glow {
+    @apply w-16 h-16 mx-auto mb-6 flex items-center justify-center text-cyan-400;
+    filter: drop-shadow(0 0 10px #0ea5e9);
+    animation: icon-pulse 3s infinite alternate;
+  }
+  /* --- END WEBINAR CARD STYLES --- */
+
 
   .whatsapp-btn {
     @apply relative inline-flex items-center gap-3 px-8 py-4 rounded-xl font-semibold text-white text-lg overflow-hidden bg-gradient-to-r from-green-500 to-emerald-600;
@@ -217,82 +238,82 @@
     @apply relative z-10 flex items-center gap-3;
   }
 
-  /* --- EXISTING TEAM CARD STYLES --- */
-  .team-card-container {
+  /* --- REDESIGNED TECHY FLIP CARD STYLES --- */
+  /* Wrapper for 3D perspective and elevation */
+  .tech-card-wrapper {
     perspective: 1000px;
     position: relative;
+    cursor: pointer;
     z-index: 1;
-    transition: transform 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.3, 1), box-shadow 0.4s ease;
   }
   
-  .team-card-container:hover {
-    transform: translateY(-10px) scale(1.05);
-    z-index: 10;
-  }
-
-  .team-card {
-    @apply relative w-full h-64 rounded-2xl;
+  /* Container for the flipping action */
+  .tech-card-container {
+    @apply relative w-full h-72 rounded-xl; 
     transform-style: preserve-3d;
-    transition: transform 0.5s cubic-bezier(0.2, 0.8, 0.3, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    /* Base shadow for presence */
+    box-shadow: 0 8px 30px rgba(0,0,0,0.6);
   }
 
-  .team-card-face {
-    @apply absolute w-full h-full flex flex-col items-center justify-center p-6 rounded-2xl overflow-hidden;
+  /* Animated border effect (Active state on hover/click) */
+  .tech-card-wrapper.is-active .tech-card-container {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.8), 0 0 40px rgba(56, 189, 248, 0.6);
+    transform: translateY(-10px) scale(1.05); /* Lift up slightly */
+  }
+
+  .tech-card-face {
+    @apply absolute w-full h-full p-6 rounded-xl overflow-hidden;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     transform-style: preserve-3d; 
   }
-  
-  .team-card-face::before {
-    content: '';
-    position: absolute;
-    inset: -2px; 
-    z-index: -1;
-    border: 2px solid transparent;
-    border-radius: inherit;
-    box-shadow: 0 0 25px 3px rgba(59, 130, 246, 0.6), 
-                0 0 45px 6px rgba(168, 85, 247, 0.4),
-                inset 0 0 15px rgba(59, 130, 246, 0.4);
-    transform: translateZ(-20px);
-    opacity: 0;
-    transition: opacity 0.4s ease-in-out;
+
+  /* Front Face: High Contrast, Minimalist */
+  .tech-card-front {
+    @apply flex flex-col items-center justify-center;
+    background: rgba(15, 15, 25, 0.9);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: border 0.3s ease;
+  }
+  /* Front Face Active State Glow */
+  .tech-card-wrapper.is-active .tech-card-front {
+    border-color: rgba(56, 189, 248, 0.6);
   }
 
-  .team-card-container:hover .team-card-face::before {
-    opacity: 1;
-  }
-
-  .team-card-front {
-    @apply bg-dark-400 border border-gray-700;
-  }
-
-  .team-card-back {
+  /* Back Face: Dynamic Gradient */
+  .tech-card-back {
+    @apply flex flex-col items-center justify-center;
     transform: rotateY(180deg);
-    background-image: 
-      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.1" numOctaves="3" stitchTiles="stitch"><animate attributeName="baseFrequency" dur="20s" values="0.1;0.12;0.1" repeatCount="indefinite" /></feTurbulence></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.2"/></svg>'),
-      radial-gradient(ellipse at 50% 50%, hsla(210, 90%, 55%, 0.6) 0%, hsla(260, 90%, 40%, 0.7) 40%, transparent 70%);
+    background: linear-gradient(45deg, #1f1d4f, #0d1a2b); /* Deep blue/purple gradient */
+    border: 1px solid #a855f7; /* Purple border */
+    box-shadow: inset 0 0 20px rgba(168, 85, 247, 0.4);
+    position: relative;
   }
 
-  .team-card-back::after {
+  /* Inner Content Glow/Animation for Back Face */
+  .tech-card-back::after {
     content: '';
     position: absolute;
-    z-index: -1;
-    inset: -120%; 
-    background-image: radial-gradient(ellipse at center, hsla(210, 90%, 70%, 0.6) 0%, hsla(260, 90%, 70%, 0.3) 40%, transparent 70%);
-    filter: blur(50px);
-    opacity: 0;
-    transform: scale(0.6);
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(circle at center, rgba(168, 85, 247, 0.15) 0%, transparent 60%);
+    opacity: 0.5;
+    animation: pulse-glow 3s infinite alternate; /* Reusing existing keyframe */
   }
 
-  .team-card-container:hover .team-card-back::after {
-    opacity: 1;
-    transform: scale(1);
+  .tech-avatar {
+    @apply w-24 h-24 rounded-full mb-4 border-2 flex items-center justify-center text-3xl font-bold transition-all duration-300;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+    background-color: rgba(255, 255, 255, 0.05); /* Subtle inner dark background */
   }
-
-  /* --- NEW MAINTAINER DOSSIER CARD STYLES (NAVY BLUE THEME) --- */
+  
+  /* --- HOLLYWOOD HACKER DOSSIER CARD (MAINTAINERS) --- */
+  
+  /* Base Container */
   .maintainer-dossier-wrapper {
-    @apply relative cursor-pointer;
+    @apply relative cursor-pointer overflow-hidden;
     transition: transform 0.4s ease, box-shadow 0.4s ease;
   }
 
@@ -304,75 +325,149 @@
 
   .maintainer-dossier-card {
     @apply relative w-full h-80 rounded-2xl p-6 flex flex-col items-center justify-center text-center overflow-hidden;
-    background: #0d1a2b; 
-    border: 1px solid #3b82f6; 
-    box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.3); 
-    font-family: 'Share Tech Mono', monospace, sans-serif;
+    background: #051020; /* Very dark blue/black */
+    border: 1px solid #3b82f6; /* Cyan/Blue border */
+    box-shadow: inset 0 0 15px rgba(59, 130, 246, 0.2), 0 0 25px rgba(59, 130, 246, 0.1); 
+    font-family: 'Tektur', sans-serif;
     color: #93c5fd; 
+    /* Apply Fragment Animation to the Card (Subtle movement) */
+    animation: glitch-fragment-animation 0.2s linear infinite alternate;
+  }
+
+  /* RED ALERT STYLES */
+  .maintainer-dossier-card.red-alert {
+    border-color: #f87171; /* Red border */
+    box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.5), 0 0 35px rgba(239, 68, 68, 0.4);
+    animation: glitch-fragment-animation 0.1s linear infinite alternate, 
+               red-alert-pulse 1s infinite alternate;
+  }
+  .maintainer-dossier-card.red-alert .dossier-icon {
+    color: #f87171;
+    filter: drop-shadow(0 0 10px #f87171);
+    animation: pulse-glow-red 0.5s infinite alternate;
+  }
+  .maintainer-dossier-card.red-alert .dossier-protocol {
+    color: #f87171;
+  }
+  .maintainer-dossier-card.red-alert .dossier-name {
+    text-shadow: 0 0 5px #f87171;
+  }
+  
+  /* Horizontal Scanline Effect */
+  .horizontal-scanline {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, transparent, #67e8f9, transparent);
+    box-shadow: 0 0 15px #67e8f9;
+    opacity: 0.6;
+    z-index: 10;
+    animation: horizontal-scan-animation 4s linear infinite;
+  }
+
+  /* GPS Tracking Grid */
+  .gps-tracking-grid {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(to right, rgba(59, 130, 246, 0.1) 1px, transparent 1px),
+                      linear-gradient(to bottom, rgba(59, 130, 246, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: gps-scroll 30s linear infinite;
+    z-index: 5;
+    opacity: 0.2;
+    pointer-events: none;
+  }
+  
+  /* Data Fragment Overlay Effect */
+  .data-fragment-overlay {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(103, 232, 249, 0.1), /* Cyan */
+      rgba(103, 232, 249, 0.1) 1px,
+      transparent 2px,
+      transparent 100px
+    );
+    opacity: 0.2;
+    pointer-events: none;
+    animation: fragment-scroll 60s linear infinite;
+    z-index: 5;
   }
 
   .maintainer-face {
-    @apply w-full h-full flex flex-col items-center justify-center;
+    @apply w-full h-full flex flex-col items-center justify-center relative z-10; /* Z-index over fragments */
   }
   
   .dossier-icon {
-    @apply mb-4 text-blue-400;
-    filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.7));
+    @apply mb-4 text-cyan-400;
+    filter: drop-shadow(0 0 10px rgba(56, 189, 248, 1));
+    animation: pulse-glow 2s infinite alternate; /* More intense pulse */
   }
 
   .dossier-name {
     @apply text-3xl font-bold text-white tracking-wider;
+    text-shadow: 0 0 5px #67e8f9;
   }
   
   .dossier-aka {
-    @apply text-lg font-mono text-blue-300;
+    @apply text-lg font-mono text-cyan-300;
   }
   
   .dossier-divider {
     @apply w-1/3 h-px bg-blue-800 my-4;
+    box-shadow: 0 0 10px #3b82f6;
   }
   
   .dossier-protocol {
-    @apply text-sm uppercase tracking-[0.2em] text-blue-400;
+    @apply text-sm uppercase tracking-[0.2em] text-cyan-400;
   }
   
   .decrypt-button {
-    @apply mt-6 px-4 py-2 rounded-md font-mono text-sm uppercase cursor-pointer;
-    border: 1px solid #3b82f6;
-    color: #93c5fd;
-    text-shadow: 0 0 5px rgba(59, 130, 246, 0.6);
-    box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+    @apply mt-6 px-6 py-3 rounded-sm font-mono text-lg uppercase cursor-pointer relative overflow-hidden;
+    border: 1px solid #a855f7; /* Purple border */
+    color: #f0abfc; /* Light pink/purple */
+    background: rgba(168, 85, 247, 0.1);
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+    box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
     transition: all 0.3s ease-in-out;
+    letter-spacing: 0.1em;
   }
 
   .decrypt-button:hover {
-    background: rgba(59, 130, 246, 0.1);
-    color: #dbeafe;
-    text-shadow: 0 0 10px rgba(59, 130, 246, 0.8), 0 0 20px rgba(59, 130, 246, 0.6);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.6), 0 0 30px rgba(59, 130, 246, 0.4);
+    background: rgba(168, 85, 247, 0.3);
+    color: #fff;
+    text-shadow: 0 0 15px #f0abfc, 0 0 30px #a855f7;
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.8), 0 0 50px rgba(168, 85, 247, 0.6);
   }
 
-  /* --- REFINED DOSSIER MODAL STYLES --- */
+  /* --- REFINED DOSSIER MODAL STYLES (INTENSE GLOW) --- */
   .dossier-backdrop {
     @apply fixed inset-0 z-50 flex items-center justify-center p-4;
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background-color: rgba(0, 0, 0, 0.95); /* Deeper black */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   .dossier-modal-container {
     @apply relative w-full max-w-4xl h-[500px] rounded-lg overflow-hidden flex items-center justify-center;
     background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
-    border: 1px solid #1e40af;
+    border: 2px solid #1e40af; /* Thicker border */
     box-shadow: 0 0 0px rgba(59, 130, 246, 0);
     transition: box-shadow 0.8s ease-out 0.5s;
   }
 
   .dossier-modal-container.glow-active {
-    box-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 
-                0 0 60px rgba(59, 130, 246, 0.6),
-                0 0 100px rgba(59, 130, 246, 0.4);
-    animation: pulse-glow 2s infinite alternate;
+    /* Extreme Glow */
+    box-shadow: 0 0 40px rgba(59, 130, 246, 1), 
+                0 0 80px rgba(59, 130, 246, 0.8),
+                0 0 120px rgba(59, 130, 246, 0.6);
+    animation: pulse-glow-intense 1.5s infinite alternate;
   }
 
   .dossier-error-shake {
@@ -381,8 +476,8 @@
 
   .dossier-error-text {
     @apply text-3xl font-mono text-red-500 text-center;
-    text-shadow: 0 0 10px rgba(239, 68, 68, 0.7);
-    animation: glitch-text-red 0.8s infinite alternate;
+    text-shadow: 0 0 15px rgba(239, 68, 68, 1);
+    animation: glitch-text-red 0.5s infinite alternate; /* Faster glitch */
   }
 
   .dossier-inner-content {
@@ -392,8 +487,8 @@
   }
 
   .dossier-bracket {
-    @apply absolute h-1 w-full bg-gradient-to-r from-transparent via-blue-500 to-transparent;
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.6), 0 0 30px rgba(59, 130, 246, 0.4);
+    @apply absolute h-1 w-full bg-gradient-to-r from-transparent via-cyan-500 to-transparent;
+    box-shadow: 0 0 20px rgba(103, 232, 249, 0.8), 0 0 40px rgba(59, 130, 246, 0.6);
     transform-origin: center;
   }
   .dossier-bracket.top { @apply top-0; }
@@ -409,6 +504,7 @@
     background: rgba(13, 26, 43, 0.6);
     border: 1px solid #1e40af;
     border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(30, 58, 138, 0.5); /* Inner shadow */
   }
 
   .dossier-panel-inner {
@@ -419,18 +515,19 @@
   .dossier-panel-inner::before, .dossier-panel-inner::after {
     content: '';
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 25px; /* Larger corner marks */
+    height: 25px;
     border-color: #67e8f9; /* Bright cyan */
     border-style: solid;
     transition: all 0.3s ease-in-out;
     border-radius: 6px;
+    filter: drop-shadow(0 0 5px #67e8f9); /* Corner glow */
   }
 
   .dossier-panel:hover::before, .dossier-panel:hover::after,
   .dossier-panel:hover .dossier-panel-inner::before, 
   .dossier-panel:hover .dossier-panel-inner::after {
-    filter: drop-shadow(0 0 5px #67e8f9);
+    filter: drop-shadow(0 0 10px #67e8f9); /* Intense corner glow on hover */
   }
 
   .dossier-panel::before { top: -2px; left: -2px; border-width: 2px 0 0 2px; }
@@ -446,8 +543,9 @@
   .dossier-avatar-container-static { 
     @apply w-40 h-40 rounded-full flex items-center justify-center;
     background: radial-gradient(circle at center, #1e40af 0%, #0d1a2b 100%);
-    border: 2px solid #3b82f6;
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    border: 3px solid #3b82f6; /* Thicker blue border */
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.4);
+    animation: pulse-glow 2s infinite alternate; /* Avatar pulse */
   }
   
   .dossier-subject-heading {
@@ -455,18 +553,27 @@
   }
 
   .dossier-status-label {
-    @apply mt-6 px-3 py-1 text-sm font-semibold rounded-full bg-green-500/10 text-green-400 border border-green-500/30;
-    box-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+    @apply mt-6 px-3 py-1 text-sm font-semibold rounded-full bg-green-500/20 text-green-300 border border-green-500/50;
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.6);
+  }
+  
+  /* RED ALERT STATUS LABEL */
+  .dossier-status-label.red-alert {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+    border-color: rgba(239, 68, 68, 0.5);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+    animation: pulse-glow-red 1s infinite alternate;
   }
   
   .dossier-right-panel {
-    @apply w-full h-full overflow-y-auto font-mono text-blue-200 text-lg flex flex-col;
+    @apply w-full h-full overflow-y-auto font-mono text-cyan-200 text-lg flex flex-col;
     font-family: 'Share Tech Mono', monospace; 
   }
   
   .dossier-right-panel::-webkit-scrollbar { width: 6px; }
   .dossier-right-panel::-webkit-scrollbar-track { background: transparent; }
-  .dossier-right-panel::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 3px; }
+  .dossier-right-panel::-webkit-scrollbar-thumb { background: #67e8f9; border-radius: 3px; }
 
   .typewriter-text {
     @apply whitespace-pre-wrap flex-grow;
@@ -500,15 +607,16 @@
   }
 
   .dossier-social-link {
-    @apply text-blue-400 hover:text-white hover:scale-110 transition-all duration-300;
-    filter: drop-shadow(0 0 5px rgba(96, 165, 250, 0.5));
+    @apply text-cyan-400 hover:text-white hover:scale-110 transition-all duration-300;
+    filter: drop-shadow(0 0 8px rgba(103, 232, 249, 0.7));
   }
 
   .dossier-close-btn {
     @apply absolute top-4 right-4 text-gray-400 hover:text-white transition-colors z-20;
-    background: rgba(0,0,0,0.4);
+    background: rgba(0,0,0,0.6);
     border-radius: 50%;
     padding: 4px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
   }
 
   .login-form-container {
@@ -709,6 +817,17 @@
     0% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.4); }
     100% { box-shadow: 0 0 45px rgba(59, 130, 246, 0.9), 0 0 80px rgba(59, 130, 246, 0.7), 0 0 120px rgba(59, 130, 246, 0.5); }
   }
+  /* NEW INTENSE GLOW FOR MODAL */
+  @keyframes pulse-glow-intense {
+    0% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.9), 0 0 60px rgba(59, 130, 246, 0.7); }
+    50% { box-shadow: 0 0 50px rgba(103, 232, 249, 1), 0 0 100px rgba(59, 130, 246, 0.9); }
+    100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.9), 0 0 60px rgba(59, 130, 246, 0.7); }
+  }
+  /* NEW RED ALERT PULSE */
+  @keyframes red-alert-pulse {
+    0% { box-shadow: 0 0 15px rgba(239, 68, 68, 0.9); }
+    100% { box-shadow: 0 0 35px rgba(239, 68, 68, 1), 0 0 70px rgba(239, 68, 68, 0.7); }
+  }
   @keyframes fade-in {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -721,6 +840,70 @@
     80% { transform: translate(2px, -2px); text-shadow: 4px 0 rgba(239, 68, 68, 0.7); }
     100% { transform: translate(0); text-shadow: 0 0 5px rgba(239, 68, 68, 0.7); }
   }
+  /* Keyframes for the webinar card animation */
+  @keyframes rotate {
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  @keyframes icon-pulse {
+    0% {
+      filter: drop-shadow(0 0 5px #0ea5e9);
+      transform: scale(1);
+    }
+    100% {
+      filter: drop-shadow(0 0 15px #0ea5e9);
+      transform: scale(1.05);
+    }
+  }
+
+  /* 🔥 NEW HACKER ANIMATIONS 🔥 */
+  
+  /* 1. Horizontal Scanline Animation (Loading Sign) */
+  @keyframes horizontal-scan-animation {
+    0% { top: 0; }
+    50% { top: 100%; }
+    50.1% { top: 0; } /* Immediate reset to prevent reverse movement */
+    100% { top: 100%; }
+  }
+  
+  /* 2. GPS Tracking Grid Scroll */
+  @keyframes gps-scroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 100%; } /* Diagonal scroll for dynamic tracking */
+  }
+
+  /* 3. Data Fragment Scroll (Background texture) */
+  @keyframes fragment-scroll {
+    0% { background-position-y: 0; }
+    100% { background-position-y: 5000px; } /* Long, slow vertical scroll */
+  }
+  
+  /* 4. Card Fragment Glitch */
+  @keyframes glitch-fragment-animation {
+    0% {
+      transform: translate(0, 0) skewX(0deg);
+    }
+    10% {
+      transform: translate(-0.5px, 0.5px) skewX(0.5deg);
+    }
+    20% {
+      transform: translate(0.5px, -0.5px) skewX(-0.5deg);
+    }
+    30% {
+      transform: translate(-1px, 1px) skewX(1deg);
+    }
+    40% {
+      transform: translate(1px, -1px) skewX(-1deg);
+    }
+    50% {
+      transform: translate(-0.2px, 0.2px) skewX(0.2deg);
+    }
+    100% {
+      transform: translate(0, 0) skewX(0deg);
+    }
+  }
+
 }
 
 ::-webkit-scrollbar {

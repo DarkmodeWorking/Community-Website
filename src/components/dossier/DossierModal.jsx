@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Github, Linkedin, Twitter } from 'lucide-react';
-import TypewriterEffect from '../ui/TypewriterEffect';
+// Assuming TypewriterEffect is a functional component
+import TypewriterEffect from '../ui/TypewriterEffect'; 
 
 // Component for the final, static text display with social links
 const StaticDossierText = ({ lines, socials }) => (
   <>
     <div className="dossier-typewritten-static flex-grow">
       {lines.map((line, i) => (
-        <p key={i} dangerouslySetInnerHTML={{ __html: line.replace(/(\[.*?\])/, '<span class="prefix">$1</span>') }} />
+        // The prefix class handles the color/shadow for the bracketed text
+        <p key={i} dangerouslySetInnerHTML={{ __html: line.replace(/(\[.*?\])/g, '<span class="prefix">$1</span>') }} />
       ))}
     </div>
     <div className="dossier-socials-container">
@@ -22,18 +24,25 @@ const StaticDossierText = ({ lines, socials }) => (
 const DossierModal = ({ dossier, onClose }) => {
   const [stage, setStage] = useState('opening'); // opening -> error -> decrypting -> decrypted
   
+  const isRedAlert = dossier.status === 'RED_ALERT';
+
   useEffect(() => {
-    const timer1 = setTimeout(() => setStage('error'), 1200);
-    const timer2 = setTimeout(() => setStage('decrypting'), 2200); 
+    // Stage transition timings adjusted for the high-tech feel
+    const timer1 = setTimeout(() => setStage('error'), 1000); // 1.0s to error/shake
+    const timer2 = setTimeout(() => setStage('decrypting'), 2000); // 2.0s to start typing
+
+    // Automatically transition from decrypting to decrypted when the Typewriter finishes
+    // Note: The TypewriterEffect handles setting stage('decrypted') via onComplete prop.
+
     return () => { clearTimeout(timer1); clearTimeout(timer2); };
-  }, []);
+  }, [dossier]); // Rerun effect if a different dossier is selected
 
   const getInitials = (name) => {
     return name.split(' ').map(n => n[0]).join('');
   }
 
-  // Decryption lines (Threat Assessment removed)
-  const decryptionLines = [
+  // --- UPDATED: Construct decryption lines with conditional Red Alert fields ---
+  let decryptionLines = [
     '[INIT] Running Diagnostics...',
     '[AUTH] Credentials verified. Access token generated.',
     '[SYSTEM] Bypassing primary security layer...',
@@ -46,13 +55,29 @@ const DossierModal = ({ dossier, onClose }) => {
     `Primary Designation: ${dossier.details.designation}`,
     `Clearance: ${dossier.details.clearance}`,
     `Sector: ${dossier.details.sector}`,
-    `Status: Field Active`,
+    `Status: Field ${dossier.status === 'ACTIVE' ? 'Active' : 'Compromised'}`,
   ];
+  
+  // --------------------------------------------------------------------------
 
   return (
     <motion.div className="dossier-backdrop" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
+      {/* Local styles for hiding the scrollbar without affecting the whole app */}
+      <style>
+        {`
+          .hidden-scrollbar-panel::-webkit-scrollbar {
+            display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+          }
+          .hidden-scrollbar-panel {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+          }
+        `}
+      </style>
+
       <motion.div 
-        className={`dossier-modal-container ${stage === 'error' ? 'dossier-error-shake' : ''} glow-active`}
+        // Conditionally apply 'dossier-error-shake' and apply 'red-alert' specific modal class
+        className={`dossier-modal-container ${stage === 'error' ? 'dossier-error-shake' : ''} glow-active ${isRedAlert ? 'red-alert' : ''}`}
         initial={{ opacity: 0, scale: 0.9 }} 
         animate={{ opacity: 1, scale: 1 }} 
         exit={{ opacity: 0, scale: 0.9 }}
@@ -76,17 +101,26 @@ const DossierModal = ({ dossier, onClose }) => {
                             <div className="dossier-panel-inner">
                                 <div className="dossier-left-panel">
                                     <h4 className="dossier-subject-heading mb-6">SUBJECT FILE</h4>
-                                    <div className="dossier-avatar-container-static">
+                                    <div className={`dossier-avatar-container-static ${isRedAlert ? 'red-alert-avatar' : ''}`}>
                                         <span className="text-6xl font-bold text-blue-300">{getInitials(dossier.name)}</span>
                                     </div>
-                                    <div className="dossier-status-label">STATUS: ACTIVE</div>
+                                    {/* UPDATED: Status Label is dynamic and applies red-alert class */}
+                                    <div className={`dossier-status-label ${isRedAlert ? 'red-alert' : ''}`}>
+                                        STATUS: {dossier.status}
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="dossier-panel">
+                        {/* FIX: Re-enable scrolling functionality with hidden scrollbar */}
+                        <div className="dossier-panel"> 
                             <div className="dossier-panel-inner">
-                                <div className="dossier-right-panel">
+                                {/* Applied classes: 
+                                  - h-full: Ensures the container takes up the full height of the panel-inner.
+                                  - overflow-y-auto: Enables vertical scrolling.
+                                  - hidden-scrollbar-panel: Custom class to hide the scrollbar visually via CSS.
+                                */}
+                                <div className="dossier-right-panel h-full overflow-y-auto hidden-scrollbar-panel">
                                     {stage === 'decrypting' && (
                                         <TypewriterEffect 
                                             lines={decryptionLines} 

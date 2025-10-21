@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Github, Star, Lock } from 'lucide-react';
+// Assuming DossierModal is available and imported from the correct path
 import DossierModal from '../components/dossier/DossierModal';
 
-// Data updated with unique IDs and image URLs
+// --- UPDATED DATA: RED ALERT AND CLASSIFIED DETAILS INCLUDED ---
 const maintainersData = [
   { 
     name: 'Anurag Bhattacharjee', 
     aka: 'TronAres', 
     id: 'B2B-M01',
     imageUrl: 'https://placehold.co/200x200/0d1a2b/93c5fd?text=AB',
+    status: 'ACTIVE',
     details: {
         designation: 'Lead Systems Architect',
         clearance: 'Level 5 (Operational Command)',
@@ -26,6 +28,7 @@ const maintainersData = [
     aka: 'StrawHatPirate', 
     id: 'B2B-M02',
     imageUrl: 'https://placehold.co/200x200/0d1a2b/93c5fd?text=KK',
+    status: 'ACTIVE',
     details: {
         designation: 'Cyber Operations Specialist',
         clearance: 'Level 5 (Tactical Ops)',
@@ -42,10 +45,12 @@ const maintainersData = [
     aka: 'Alpha-07', 
     id: 'B2B-M03',
     imageUrl: 'https://placehold.co/200x200/0d1a2b/93c5fd?text=RN',
+    status: 'RED_ALERT', // RED ALERT TARGET
     details: {
-        designation: 'Frontend Engineering Lead',
-        clearance: 'Level 5 (Operational Lead)',
-        sector: 'Project B2B'
+        designation: '[CLASSIFIED] Lead Interceptor',
+        clearance: 'Level 7 (HIGHLY CLASSIFIED)',
+        sector: 'System Interception & Reconnaissance',
+        
     },
     socials: {
         github: '#',
@@ -58,10 +63,12 @@ const maintainersData = [
     aka: 'Shadow-007', 
     id: 'B2B-M04',
     imageUrl: 'https://placehold.co/200x200/0d1a2b/93c5fd?text=AD',
+    status: 'RED_ALERT', // RED ALERT TARGET
     details: {
-        designation: 'Dataflow Analyst',
-        clearance: 'Level 5 (Core Infrastructure)',
-        sector: 'Project B2B'
+        designation: '[CLASSIFIED] Dataflow Exfiltration',
+        clearance: 'Level 7 (HIGHLY CLASSIFIED)',
+        sector: 'Deep Packet Inspection & Data Flow',
+        
     },
     socials: {
         github: '#',
@@ -74,6 +81,7 @@ const maintainersData = [
     aka: 'Unicorn09', 
     id: 'B2B-M05',
     imageUrl: 'https://placehold.co/200x200/0d1a2b/93c5fd?text=AC',
+    status: 'ACTIVE',
     details: {
         designation: 'Backend Systems Engineer',
         clearance: 'Level 5 (Event Lead)',
@@ -102,30 +110,47 @@ const cardVariants = {
   }),
 };
 
-// Card component triggers the modal
-const MaintainerCard = ({ maintainer, index, onDecrypt }) => (
-    <motion.div
-        custom={index}
-        variants={cardVariants}
-        className="maintainer-dossier-wrapper"
-        onClick={() => onDecrypt(maintainer)}
-    >
-        <div className="maintainer-dossier-card">
-            <div className="maintainer-face maintainer-front">
-                <div className="dossier-icon">
-                    <Lock size={40} />
+// --- Maintainer Card with Red Alert, GPS, and Horizontal Loading Animations ---
+const MaintainerCard = ({ maintainer, index, onDecrypt }) => {
+    const isRedAlert = maintainer.status === 'RED_ALERT';
+    
+    return (
+        <motion.div
+            custom={index}
+            variants={cardVariants}
+            className="maintainer-dossier-wrapper"
+            onClick={() => onDecrypt(maintainer)}
+        >
+            <div className={`maintainer-dossier-card ${isRedAlert ? 'red-alert' : ''}`}>
+                
+                {/* 1. Horizontal Scanline (Hollywood Loading Sign) - Continuous */}
+                <div className="horizontal-scanline"></div>
+                
+                {/* 2. Live Continuous GPS Tracking Grid */}
+                {/* This element uses the gps-tracking-grid class defined in index.css */}
+                <div className="gps-tracking-grid"></div>
+
+                {/* 3. Data Fragment Overlay (Data Shards) */}
+                <div className="data-fragment-overlay"></div>
+
+                <div className="maintainer-face maintainer-front">
+                    <div className="dossier-icon">
+                        <Lock size={40} />
+                    </div>
+                    <h3 className="dossier-name">{maintainer.name}</h3>
+                    <p className="dossier-aka">{maintainer.aka}</p>
+                    <div className="dossier-divider"></div>
+                    <p className={`dossier-protocol ${isRedAlert ? 'text-red-400' : 'text-cyan-400'}`}>
+                        STATUS: {maintainer.status}
+                    </p>
+                    <button className="decrypt-button">
+                        [ ACCESS PROTOCOL ]
+                    </button>
                 </div>
-                <h3 className="dossier-name">{maintainer.name}</h3>
-                <p className="dossier-aka">{maintainer.aka}</p>
-                <div className="dossier-divider"></div>
-                <p className="dossier-protocol">ID: {maintainer.id}</p>
-                <button className="decrypt-button">
-                    [ Click to Decrypt ]
-                </button>
             </div>
-        </div>
-    </motion.div>
-);
+        </motion.div>
+    );
+};
 
 const Maintainers = () => {
   const [selectedDossier, setSelectedDossier] = useState(null);

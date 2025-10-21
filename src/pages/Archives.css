@@ -1,0 +1,286 @@
+/* Archives Page Styles */
+.archives-page {
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* REMOVED: Solid background styles to allow particle effect */
+
+/* Typing Animation */
+.typing-indicator {
+  display: flex;
+  gap: 2px;
+}
+
+.cursor {
+  width: 3px;
+  height: 18px;
+  background: #06b6d4;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+.typing-cursor {
+  animation: blink 1s infinite;
+  color: #06b6d4;
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+/* Card Hover Effects */
+.card-hover-glow {
+  transition: all 0.3s ease;
+}
+
+.card-hover-glow:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3),
+              0 0 80px rgba(59, 130, 246, 0.1);
+}
+
+/* Glitch Text Effect */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  animation: glitch-1 0.5s infinite;
+  color: #ff0080;
+  z-index: -1;
+}
+
+.glitch-text::after {
+  animation: glitch-2 0.5s infinite;
+  color: #00ffff;
+  z-index: -2;
+}
+
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes glitch-1 {
+  0%, 100% {
+    transform: translate(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(-2px, 2px);
+    opacity: 0.4;
+  }
+}
+
+@keyframes glitch-2 {
+  0%, 100% {
+    transform: translate(0);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(2px, -2px);
+    opacity: 0.4;
+  }
+}
+
+/* Title Glow Effect */
+.title-glow {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5),
+               0 0 40px rgba(59, 130, 246, 0.3),
+               0 0 60px rgba(59, 130, 246, 0.1);
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Gradient Border */
+.gradient-border {
+  position: relative;
+  background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+  margin: -1px;
+  border-radius: inherit;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #06b6d4, #3b82f6);
+  background-size: 300% 300%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Card Background Gradient */
+.card-bg-gradient {
+  background: linear-gradient(135deg, 
+    rgba(30, 41, 59, 0.95) 0%,
+    rgba(15, 23, 42, 0.95) 50%,
+    rgba(30, 41, 59, 0.95) 100%);
+  backdrop-filter: blur(10px);
+}
+
+/* Login Form Container Style (Matching your theme) */
+.login-form-container {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .archives-hero {
+    padding: 120px 0 60px;
+  }
+
+  .main-title {
+    font-size: 3rem;
+  }
+
+  .title-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .endorsement-container {
+    padding: 2rem 1.5rem;
+    margin: 0 1rem;
+  }
+
+  .endorsement-text {
+    font-size: 1.1rem;
+    min-height: 200px;
+  }
+
+  .personalities-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 1rem;
+  }
+
+  .personality-card {
+    padding: 2rem;
+  }
+
+  .person-name {
+    font-size: 1.5rem;
+  }
+
+  .person-position {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .credibility-metrics {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .validation-stats {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .validation-content {
+    padding: 2rem 1.5rem;
+    margin: 0 1rem;
+  }
+
+  .validation-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 2.5rem;
+  }
+
+  .title-subtitle {
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+  }
+
+  .endorsement-text {
+    font-size: 1rem;
+  }
+
+  .personality-card {
+    padding: 1.5rem;
+  }
+
+  .profile-frame {
+    width: 100px;
+    height: 100px;
+  }
+
+  .image-placeholder {
+    font-size: 1.5rem;
+  }
+
+  .person-name {
+    font-size: 1.3rem;
+  }
+}

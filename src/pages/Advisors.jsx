@@ -45,8 +45,8 @@ const AdvisorCard = ({ advisor }) => {
       style={{ rotateX: rotateXSpring, rotateY: rotateYSpring, perspective: 1000 }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      // UPDATED: Added the card-hover-glow class here
-      className="gradient-border p-6 rounded-2xl text-center card-bg-gradient flex flex-col items-center h-full card-hover-glow"
+      // UPDATED: Replaced gradient-border with frosted-card and removed card-hover-glow
+      className="frosted-card p-6 rounded-2xl text-center flex flex-col items-center h-full"
     >
       <motion.div 
         style={{ x: avatarX, y: avatarY }} 

@@ -975,3 +975,539 @@
     @apply text-sm;
   }
 }
+
+
+/* Enhanced Blue Glitch Text Animation with Background Dimming */
+.glitch-text-blue {
+  position: relative;
+  animation: glitch-skew-blue 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  text-shadow: 
+    0 0 10px rgba(59, 130, 246, 0.3),
+    0 0 20px rgba(59, 130, 246, 0.2),
+    0 0 30px rgba(59, 130, 246, 0.1);
+}
+
+.glitch-text-blue::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  border-radius: 20px;
+  z-index: -1;
+  animation: background-pulse 4s ease-in-out infinite;
+  filter: blur(15px);
+}
+
+.glitch-text-blue::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.glitch-text-blue .glitch-layer-1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  left: 2px;
+  text-shadow: -2px 0 #60a5fa;
+  animation: glitch-one-blue 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+.glitch-text-blue .glitch-layer-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  left: -2px;
+  text-shadow: 2px 0 #93c5fd;
+  animation: glitch-two-blue 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+/* Enhanced Blue Glitch Keyframes */
+@keyframes glitch-skew-blue {
+  0%, 85%, 100% { 
+    transform: skew(0deg) scale(1);
+    text-shadow: 
+      0 0 10px rgba(59, 130, 246, 0.3),
+      0 0 20px rgba(59, 130, 246, 0.2),
+      0 0 30px rgba(59, 130, 246, 0.1);
+  }
+  86% { 
+    transform: skew(-3deg) scale(1.02);
+    text-shadow: 
+      0 0 15px rgba(59, 130, 246, 0.5),
+      0 0 25px rgba(59, 130, 246, 0.3),
+      0 0 35px rgba(59, 130, 246, 0.2);
+  }
+  87% { 
+    transform: skew(2deg) scale(1.01);
+    text-shadow: 
+      0 0 12px rgba(59, 130, 246, 0.4),
+      0 0 22px rgba(59, 130, 246, 0.25),
+      0 0 32px rgba(59, 130, 246, 0.15);
+  }
+  88% { 
+    transform: skew(0deg) scale(1);
+    text-shadow: 
+      0 0 10px rgba(59, 130, 246, 0.3),
+      0 0 20px rgba(59, 130, 246, 0.2),
+      0 0 30px rgba(59, 130, 246, 0.1);
+  }
+}
+
+@keyframes glitch-one-blue {
+  0%, 85%, 100% { 
+    transform: translate(0);
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    opacity: 0.8;
+  }
+  86% { 
+    transform: translate(-6px, 3px);
+    clip-path: polygon(0 10%, 100% 10%, 100% 40%, 0 40%);
+    opacity: 0.9;
+  }
+  87% { 
+    transform: translate(5px, -3px);
+    clip-path: polygon(0 20%, 100% 20%, 100% 50%, 0 50%);
+    opacity: 0.7;
+  }
+  88% { 
+    transform: translate(0);
+    clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+    opacity: 0.8;
+  }
+}
+
+@keyframes glitch-two-blue {
+  0%, 85%, 100% { 
+    transform: translate(0);
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    opacity: 0.7;
+  }
+  86% { 
+    transform: translate(5px, -3px);
+    clip-path: polygon(0 50%, 100% 50%, 100% 80%, 0 80%);
+    opacity: 0.8;
+  }
+  87% { 
+    transform: translate(-4px, 2px);
+    clip-path: polygon(0 40%, 100% 40%, 100% 70%, 0 70%);
+    opacity: 0.6;
+  }
+  88% { 
+    transform: translate(0);
+    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+    opacity: 0.7;
+  }
+}
+
+@keyframes background-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.1);
+  }
+}
+
+/* Enhanced Frosted Glass Cards with Hover Glow */
+.frosted-card {
+  position: relative;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  overflow: hidden;
+}
+
+.frosted-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    800px circle at var(--mouse-x) var(--mouse-y),
+    rgba(59, 130, 246, 0.15),
+    transparent 40%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+}
+
+.frosted-card::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    transparent 0%, 
+    rgba(59, 130, 246, 0.1) 30%, 
+    rgba(139, 92, 246, 0.1) 70%, 
+    transparent 100%);
+  border-radius: 22px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.frosted-card:hover::before {
+  opacity: 1;
+}
+
+.frosted-card:hover::after {
+  opacity: 1;
+}
+
+.frosted-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.3),
+    0 0 80px rgba(59, 130, 246, 0.2),
+    inset 0 0 60px rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.frosted-card:active {
+  transform: translateY(-4px) scale(1.01);
+  transition: transform 0.1s ease;
+}
+
+/* Enhanced Social Icons with Attractive Animations */
+.social-icon {
+  position: relative;
+  padding: 12px;
+  border-radius: 50%;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 2px solid transparent;
+  overflow: hidden;
+}
+
+.social-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0%,
+    currentColor 10%,
+    transparent 20%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 50%;
+}
+
+.social-icon:hover::before {
+  opacity: 0.6;
+  animation: rotate-border 1.5s linear infinite;
+}
+
+.social-icon.linkedin {
+  background: rgba(10, 102, 194, 0.15);
+  border-color: rgba(10, 102, 194, 0.3);
+  color: #0a66c2;
+}
+
+.social-icon.linkedin:hover {
+  background: rgba(10, 102, 194, 0.25);
+  border-color: #0a66c2;
+  color: #ffffff;
+  box-shadow: 
+    0 0 20px rgba(10, 102, 194, 0.6),
+    0 0 40px rgba(10, 102, 194, 0.4),
+    inset 0 0 20px rgba(10, 102, 194, 0.2);
+  transform: scale(1.15) translateY(-2px);
+}
+
+.social-icon.linkedin:active {
+  background: #0a66c2;
+  box-shadow: 
+    0 0 30px rgba(10, 102, 194, 0.8),
+    0 0 60px rgba(10, 102, 194, 0.6),
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+.social-icon.gmail {
+  background: rgba(219, 68, 55, 0.15);
+  border-color: rgba(219, 68, 55, 0.3);
+  color: #db4437;
+}
+
+.social-icon.gmail:hover {
+  background: rgba(219, 68, 55, 0.25);
+  border-color: #db4437;
+  color: #ffffff;
+  box-shadow: 
+    0 0 20px rgba(219, 68, 55, 0.6),
+    0 0 40px rgba(219, 68, 55, 0.4),
+    inset 0 0 20px rgba(219, 68, 55, 0.2);
+  transform: scale(1.15) translateY(-2px);
+}
+
+.social-icon.gmail:active {
+  background: #db4437;
+  box-shadow: 
+    0 0 30px rgba(219, 68, 55, 0.8),
+    0 0 60px rgba(219, 68, 55, 0.6),
+    inset 0 0 10px rgba(255, 255, 255, 0.3);
+  transform: scale(1.1);
+}
+
+@keyframes rotate-border {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Card Content Styling */
+.card-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Enhanced Profile Image */
+.profile-image-container {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  border: 3px solid rgba(59, 130, 246, 0.3);
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
+  padding: 4px;
+  transition: all 0.4s ease;
+}
+
+.profile-image-container::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, #3b82f6, #8b5cf6, #3b82f6);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.profile-image-container:hover::before {
+  opacity: 1;
+  animation: rotate-gradient 2s linear infinite;
+}
+
+.profile-image-container:hover {
+  border-color: transparent;
+  transform: scale(1.05);
+}
+
+@keyframes rotate-gradient {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .glitch-text-blue {
+    font-size: 2.5rem !important;
+  }
+  
+  .frosted-card {
+    margin: 0 1rem;
+    padding: 1.5rem !important;
+  }
+  
+  .profile-image-container {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .social-icon {
+    padding: 10px;
+  }
+}
+
+/* Smooth hover transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 400ms;
+}
+
+/* Additional Glow Effects */
+.glow-effect {
+  filter: drop-shadow(0 0 10px currentColor);
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-glow {
+  from {
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  to {
+    filter: drop-shadow(0 0 15px currentColor);
+  }
+}
+
+/* Add these styles to your existing index.css */
+
+/* Enhanced Social Icons with Better Colors */
+.social-icon.linkedin-enhanced {
+  background: rgba(10, 102, 194, 0.15);
+  border: 2px solid rgba(10, 102, 194, 0.4);
+  color: #60a5fa; /* Softer blue */
+  padding: 12px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.social-icon.linkedin-enhanced:hover {
+  background: rgba(10, 102, 194, 0.25);
+  border-color: #3b82f6;
+  color: #ffffff;
+  box-shadow: 
+    0 0 20px rgba(59, 130, 246, 0.6),
+    0 0 40px rgba(59, 130, 246, 0.3);
+  transform: scale(1.1);
+}
+
+.social-icon.gmail-enhanced {
+  background: rgba(219, 68, 55, 0.15);
+  border: 2px solid rgba(219, 68, 55, 0.4);
+  color: #f87171; /* Softer red */
+  padding: 12px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.social-icon.gmail-enhanced:hover {
+  background: rgba(219, 68, 55, 0.25);
+  border-color: #ef4444;
+  color: #ffffff;
+  box-shadow: 
+    0 0 20px rgba(239, 68, 68, 0.6),
+    0 0 40px rgba(239, 68, 68, 0.3);
+  transform: scale(1.1);
+}
+
+/* Slow pulse animation for gradient border */
+@keyframes pulse-slow {
+  0%, 100% { 
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.02);
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s ease-in-out infinite;
+}
+
+/* Enhanced card border animation */
+.gradient-border-card {
+  position: relative;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(45deg, #06b6d4, #3b82f6, #8b5cf6, #06b6d4);
+  background-size: 300% 300%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+
+      
+        @keyframes pulse-slow {
+          0%, 100% { opacity: 0.7; }
+          50% { opacity: 1; }
+        }
+        .animate-pulse-slow {
+          animation: pulse-slow 3s ease-in-out infinite;
+        }
+        
+        .social-icon.linkedin-enhanced {
+          background: rgba(10, 102, 194, 0.15);
+          border: 2px solid rgba(10, 102, 194, 0.4);
+          color: #60a5fa; /* Softer blue */
+          padding: 12px;
+          border-radius: 50%;
+          transition: all 0.3s ease;
+        }
+        
+        .social-icon.linkedin-enhanced:hover {
+          background: rgba(10, 102, 194, 0.25);
+          border-color: #3b82f6;
+          color: #ffffff;
+          box-shadow: 
+            0 0 20px rgba(59, 130, 246, 0.6),
+            0 0 40px rgba(59, 130, 246, 0.3);
+          transform: scale(1.1);
+        }
+        
+        .social-icon.gmail-enhanced {
+          background: rgba(219, 68, 55, 0.15);
+          border: 2px solid rgba(219, 68, 55, 0.4);
+          color: #f87171; /* Softer red */
+          padding: 12px;
+          border-radius: 50%;
+          transition: all 0.3s ease;
+        }
+        
+        .social-icon.gmail-enhanced:hover {
+          background: rgba(219, 68, 55, 0.25);
+          border-color: #ef4444;
+          color: #ffffff;
+          box-shadow: 
+            0 0 20px rgba(239, 68, 68, 0.6),
+            0 0 40px rgba(239, 68, 68, 0.3);
+          transform: scale(1.1);
+        }

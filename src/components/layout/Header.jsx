@@ -1,13 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Menu, X, Music, ChevronDown } from 'lucide-react';
+import { Menu, X, Music, ChevronDown, Pause } from 'lucide-react';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [mobileOpenDropdown, setMobileOpenDropdown] = useState(null);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  const toggleMusic = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -133,10 +147,24 @@ const Header = () => {
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
-            <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }} className="p-2 bg-dark-300/50 rounded-full border border-gray-700">
-              <Music className="h-5 w-5 text-primary-400" />
-            </motion.button>
-          </div>
+      <audio 
+        ref={audioRef} 
+        loop
+        src="/Cyberpunk2077.mp3"
+      />
+      <motion.button 
+        whileHover={{ scale: 1.1 }} 
+        whileTap={{ scale: 0.9 }} 
+        onClick={toggleMusic}
+        className="p-2 bg-dark-300/50 rounded-full border border-gray-700"
+      >
+        {isPlaying ? (
+          <Pause className="h-5 w-5 text-primary-400" />
+        ) : (
+          <Music className="h-5 w-5 text-primary-400" />
+        )}
+      </motion.button>
+    </div>
           
           {/* Mobile Menu Button */}
           <button 

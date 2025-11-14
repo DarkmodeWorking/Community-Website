@@ -1,5 +1,20 @@
 [
   {
+    "projectName": "Obi-Watch Kenobi",
+    "projectLogo": "/logo/obiwatchkenobi.jpg",
+    "projectCover": "/cover/obiwatchkenobi.png",
+    "projectDescription": "A lightweight, AI-powered Security Information and Event Management (SIEM) and Endpoint Detection and Response (EDR) application.",
+    "projectMembers": [
+      "Anurag Bhattacharjee",
+      "Promit Chaudhuri",
+      "Sankhadeep Bhowmik",
+      "Shivaditya Bhattacharya"
+    ],
+    "hackathon": "2025 Hack4Bengal 4.0",
+    "prize": null,
+    "githubLink": "https://github.com/ProSkywalker16/obi-watch-kenobi"
+  },
+  {
     "projectName": "Hexa Care",
     "projectLogo": "/logo/hexacare.png",
     "projectCover": "/cover/hexacare.png",
@@ -15,18 +30,18 @@
     "githubLink": "https://github.com/Tiklu01/Hexa-care"
   },
   {
-    "projectName": "Obi-Watch Kenobi",
-    "projectLogo": "/logo/obiwatchkenobi.jpg",
-    "projectCover": "/cover/obiwatchkenobi.png",
-    "projectDescription": "A lightweight, AI-powered Security Information and Event Management (SIEM) and Endpoint Detection and Response (EDR) application.",
+    "projectName": "Flora Fix",
+    "projectLogo": "/logo/florafix.png",
+    "projectCover": "/cover/florafix.jpg",
+    "projectDescription": "An innovative platform designed to transform agriculture by blending cutting-edge AI with ancient Ayurvedic plant-care wisdom.",
     "projectMembers": [
-      "Anurag Bhattacharjee",
-      "Promit Chaudhuri",
-      "Sankhadeep Bhowmik",
-      "Shivaditya Bhattacharya"
+      "Anindita Sen",
+      "Ankana Sadhukhan",
+      "Asmita Banerjee",
+      "Isha Chakraborty"
     ],
-    "hackathon": "2025 Hack4Bengal 4.0",
+    "hackathon": "2025 MetaMorph 2K25",
     "prize": null,
-    "githubLink": "https://github.com/ProSkywalker16/obi-watch-kenobi"
+    "githubLink": "https://github.com/Ankana-Sadhukhan/Flora-Fix.git"
   }
 ]

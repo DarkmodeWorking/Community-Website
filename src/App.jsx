@@ -17,6 +17,7 @@ import AdminLogin from './pages/AdminLogin';
 import AdminDashboard from './pages/AdminDashboard';
 import Archives from './pages/Archives'; // ADD THIS IMPORT
 import Projects from './pages/Projects';
+import Companies from './components/Companies';
 
 const AppContent = () => {
   const location = useLocation();
@@ -92,6 +93,8 @@ const AppContent = () => {
             <Route path="/past-events" element={<PastEvents />} />
             <Route path="/archives" element={<Archives />} /> {/* ADD THIS ROUTE */}
             
+            {/* <Route path="/companies" element={<Companies />} /> */}
+
             {/* ADMIN ROUTES */}
             <Route path="/admin" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />

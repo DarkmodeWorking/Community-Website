@@ -15,8 +15,8 @@ const Footer = () => {
       <div className="container mx-auto px-4 text-center text-gray-400">
         <div className="flex justify-center items-center gap-6 mb-6">
           <h4 className="text-lg font-semibold text-white">Follow Us on our Socials</h4>
-          <a href="#" className="footer-social-icon"><Instagram /></a>
-          <a href="#" className="footer-social-icon"><Linkedin /></a>
+          <a href="https://www.instagram.com/_bit_2_byte_" className="footer-social-icon-insta" target='_blank'><Instagram /></a>
+          <a href="https://www.linkedin.com/company/bit-2-byte" className="footer-social-icon-link" target='_blank'><Linkedin /></a>
         </div>
         
         <div className="flex justify-center flex-wrap gap-x-8 gap-y-2 mb-6">

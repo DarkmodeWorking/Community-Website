@@ -771,12 +771,21 @@
     @apply text-xs tracking-wider text-gray-400 uppercase;
   }
 
-  .footer-social-icon {
+  .footer-social-icon-link {
     @apply p-2 rounded-full text-gray-400 transition-all duration-300;
     background: rgba(255,255,255,0.05);
   }
-  .footer-social-icon:hover {
-    background: #5865F2;
+  .footer-social-icon-link:hover {
+    background: #187fd3;
+    color: white;
+    transform: scale(1.1);
+  }
+  .footer-social-icon-insta {
+    @apply p-2 rounded-full text-gray-400 transition-all duration-300;
+    background: rgba(255,255,255,0.05);
+  }
+  .footer-social-icon-insta:hover {
+    background: #b41dd6;
     color: white;
     transform: scale(1.1);
   }

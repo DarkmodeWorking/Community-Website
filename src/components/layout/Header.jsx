@@ -150,7 +150,8 @@ const Header = () => {
       <audio 
         ref={audioRef} 
         loop
-        src="/Cyberpunk2077.mp3"
+        // src="/Cyberpunk2077.mp3"
+        src="/nine-inch-nails-as-alive-as-you-need-me-to-be.m4a"
       />
       <motion.button 
         whileHover={{ scale: 1.1 }} 

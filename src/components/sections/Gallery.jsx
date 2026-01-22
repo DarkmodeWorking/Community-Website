@@ -2,15 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 // Import your images as you did before
-import img1 from '../../assets/gallery/image-1.png';
-import img2 from '../../assets/gallery/image-2.png';
-import img3 from '../../assets/gallery/image-3.png';
-import img4 from '../../assets/gallery/image-4.png';
-import img5 from '../../assets/gallery/image-5.png';
-import img6 from '../../assets/gallery/image-6.png';
-import img7 from '../../assets/gallery/image-7.png';
-import img8 from '../../assets/gallery/image-8.png';
-import img9 from '../../assets/gallery/image-9.png';
+import img1 from '../../../public/pics/1.jpg';
+import img2 from '../../../public/pics/4.jpg';
+import img3 from '../../../public/pics/3.jpg';
+import img4 from '../../../public/pics/92.jpg';
+import img5 from '../../../public/pics/91.jpg';
+import img6 from '../../../public/pics/6.jpg';
+import img7 from '../../../public/pics/7.jpg';
+import img8 from '../../../public/pics/8.jpg';
+import img9 from '../../../public/pics/9.jpg';
 
 const galleryImages = [img1, img2, img3, img4, img5, img6, img7, img8, img9];
 const duplicatedImages = [...galleryImages, ...galleryImages]; // Duplicate for a seamless loop

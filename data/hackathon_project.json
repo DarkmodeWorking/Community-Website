@@ -13,5 +13,35 @@
     "hackathon": "2025 Hack4Bengal 4.0",
     "prize": null,
     "githubLink": "https://github.com/ProSkywalker16/obi-watch-kenobi"
+  },
+  {
+    "projectName": "Hexa Care",
+    "projectLogo": "/logo/hexacare.png",
+    "projectCover": "/cover/hexacare.png",
+    "projectDescription": "Experience advanced helathcare solutions with intelligent diagnostics, personalized care plans power by AI-System trained on medical standards.",
+    "projectMembers": [
+      "Anurag Bhattacharjee",
+      "Mukta Das",
+      "Nanda Lal Das",
+      "Sudipta Sen"
+    ],
+    "hackathon": "2025 HexaFalls",
+    "prize": null,
+    "githubLink": "https://github.com/Tiklu01/Hexa-care"
+  },
+  {
+    "projectName": "Flora Fix",
+    "projectLogo": "/logo/florafix.png",
+    "projectCover": "/cover/florafix.jpg",
+    "projectDescription": "An innovative platform designed to transform agriculture by blending cutting-edge AI with ancient Ayurvedic plant-care wisdom.",
+    "projectMembers": [
+      "Anindita Sen",
+      "Ankana Sadhukhan",
+      "Asmita Banerjee",
+      "Isha Chakraborty"
+    ],
+    "hackathon": "2025 MetaMorph 2K25",
+    "prize": null,
+    "githubLink": "https://github.com/Ankana-Sadhukhan/Flora-Fix.git"
   }
 ]

@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Layers, MessageSquare, Sparkles } from 'lucide-react';
 import Typewriter from 'typewriter-effect';
+import { FaWhatsapp } from "react-icons/fa";
 
 const Hero = () => {
   return (
@@ -66,16 +67,18 @@ const Hero = () => {
             className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
           >
             {/* NEW: Glowing WhatsApp Button */}
-            <motion.button
+            <motion.a
+              href='https://chat.whatsapp.com/FqKO8sNUKsPB8IUfe6lIb2'
+              target='_blank'
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="whatsapp-btn"
             >
               <span className="btn-content">
-                <MessageSquare className="h-5 w-5" />
+                <FaWhatsapp className="text-2xl" />
                 Join Our Community
               </span>
-            </motion.button>
+            </motion.a>
             {/* UPDATED: Secondary Button */}
             <motion.button
               whileHover={{ scale: 1.05 }}

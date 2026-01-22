@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { Rss, ShieldCheck } from 'lucide-react';
+import { FaDiscord } from 'react-icons/fa';
 
 // Animation variants for the character cascade effect
 const containerVariants = {
@@ -94,7 +95,7 @@ const Community = () => {
         
         {/* --- NEW Techno Button --- */}
         <motion.a
-          href="#"
+          href="https://discord.gg/qXfMHtxX"
           target="_blank"
           rel="noopener noreferrer"
           initial={{ opacity: 0, scale: 0.8 }}
@@ -105,7 +106,7 @@ const Community = () => {
           className="techno-btn"
         >
           <span className="btn-content">
-            <Rss className="w-6 h-6" />
+            <FaDiscord className="text-3xl" />
             Join Our Discord Server
           </span>
         </motion.a>
